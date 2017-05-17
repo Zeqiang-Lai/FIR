@@ -19,6 +19,7 @@ public class HistoryDialog extends JDialog {
     public HistoryDialog() {
         this.setTitle("历史记录");
         this.setSize(250, 350);
+        this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
         getRecords();
@@ -27,7 +28,7 @@ public class HistoryDialog extends JDialog {
 
     private void getRecords() {
 
-        File dataDir = new File(settingIfo.fileName); // 数据文件夹
+        File dataDir = new File(SettingIfo.fileName); // 数据文件夹
         String[] files = dataDir.list();
         for (int i = 0; i < files.length; i++) {
             File file = new File(dataDir, files[i]);

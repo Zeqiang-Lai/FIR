@@ -99,7 +99,8 @@ public class GamePanel extends JPanel {
         this.repaint();
     }
 
-    private void restart() {
+    void restart() {
+        this.repaint();
         hasClick = false;
         timeTicker.stop();
         for (int i = 0; i <= hLineNum; i++)

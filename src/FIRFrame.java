@@ -1,7 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -29,6 +28,7 @@ public class FIRFrame extends JFrame {
     JPanel topIfo = new JPanel(new GridLayout(2, 1));
     JLabel whoPlay = new JLabel("轮到黑方", SwingConstants.CENTER);
     JLabel timePassed = new JLabel("00:00", SwingConstants.CENTER);
+    private JMenuItem menu3Item1;
 
     GamePanel board;
 
@@ -36,7 +36,9 @@ public class FIRFrame extends JFrame {
         this.setTitle("五子棋");
         this.setSize(500, 600);
         this.setLayout(new BorderLayout(10, 0));
+        this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+
         initialComponent();
 
     }
@@ -62,6 +64,8 @@ public class FIRFrame extends JFrame {
                 menu1Item1 = new JMenuItem("人机对战");
                 menu1Item2 = new JMenuItem("玩家对战");
 
+                menu1Item1.addActionListener(e-> menu1Item1ActionListener(e));
+                menu1Item2.addActionListener(e->menu1Item2ActionListener(e));
                 menu1.add(menu1Item1);
                 menu1.add(menu1Item2);
             }
@@ -71,13 +75,7 @@ public class FIRFrame extends JFrame {
             {
                 menu2 = new JMenu("历史记录");
                 menu2Item1 = new JMenuItem("查询");
-                menu2Item1.addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        new HistoryDialog().setVisible(true);
-                        System.out.println("menu2 clicked");
-                    }
-                });
+                menu2Item1.addActionListener(e-> menu2Item1ActionListener(e));
                 menu2.add(menu2Item1);
             }
             menuBar.add(menu2);
@@ -85,6 +83,9 @@ public class FIRFrame extends JFrame {
             // === menu3 ===
             {
                 menu3 = new JMenu("设置");
+                menu3Item1 = new JMenuItem("打开设置");
+                menu3Item1.addActionListener(e->menu3Item1ActionListener(e));
+                menu3.add(menu3Item1);
             }
             menuBar.add(menu3);
         }
@@ -107,6 +108,27 @@ public class FIRFrame extends JFrame {
         this.add(topIfo, BorderLayout.NORTH);
 
 
+    }
+
+    // 设置面板
+    private void menu3Item1ActionListener(ActionEvent e) {
+        new SettingDialog().setVisible(true);
+    }
+
+    // 历史记录
+    private void menu2Item1ActionListener(ActionEvent e) {
+        new HistoryDialog().setVisible(true);
+        System.out.println("menu2 clicked");
+    }
+
+    // 玩家对战
+    private void menu1Item2ActionListener(ActionEvent e) {
+        board.restart();
+    }
+
+    // 人机对战
+    private void menu1Item1ActionListener(ActionEvent e) {
+        JOptionPane.showMessageDialog(this,"尽情期待：https://github.com/Zeqiang-Lai/FIR");
     }
 
 }

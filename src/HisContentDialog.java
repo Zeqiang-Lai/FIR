@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
 import java.util.Date;
 
 /**
@@ -28,6 +29,7 @@ public class HisContentDialog extends JDialog {
         this.setSize(600, 690);
         this.setLayout(new BorderLayout(20, 0));
         this.setTitle(record.getName());
+        this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
         this.record = record;

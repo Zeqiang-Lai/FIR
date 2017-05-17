@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="FIR:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/FIR_jar</output-path>
+    <root id="archive" name="FIR.jar">
+      <element id="module-output" name="FIR" />
+    </root>
+  </artifact>
+</component>

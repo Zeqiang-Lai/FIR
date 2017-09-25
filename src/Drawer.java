@@ -39,8 +39,8 @@ public class Drawer {
 
     public static void drawChess(Graphics g, int hLineNum, int vLineNum, int[][] chessBoard, double lineGap, int margin, int chessSize, JPanel Panel) {
 
-        String bSrc = "image\\black.png";
-        String wSrc = "image\\white.png";
+        String bSrc = "image/black.png";    // windows image\\black.png
+        String wSrc = "image/white.png";    // windows image\\white.png
         Image blackChess = Toolkit.getDefaultToolkit().getImage(bSrc);
         Image whiteChess = Toolkit.getDefaultToolkit().getImage(wSrc);
 

@@ -123,12 +123,13 @@ public class FIRFrame extends JFrame {
 
     // 玩家对战
     private void menu1Item2ActionListener(ActionEvent e) {
-        board.restart();
+        board.restart(1);
     }
 
     // 人机对战
     private void menu1Item1ActionListener(ActionEvent e) {
-        JOptionPane.showMessageDialog(this,"尽情期待：https://github.com/Zeqiang-Lai/FIR");
+//        JOptionPane.showMessageDialog(this,"尽情期待：https://github.com/Zeqiang-Lai/FIR");
+        board.restart(2);
     }
 
 }

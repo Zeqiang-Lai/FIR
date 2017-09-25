@@ -3,6 +3,6 @@
  */
 public class SettingIfo {
 
-    public static String fileName = "data\\";   // 历史纪录目录
+    public static String fileName = "data/";   // 历史纪录目录 windows data\\
     public static int limitTime = 60;   // 时间限制
 }

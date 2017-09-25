@@ -3,6 +3,8 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.util.Date;
+import java.util.Dictionary;
+import java.util.HashMap;
 
 /**
  * Created by 91632 on 2017/5/14 0014.
@@ -13,6 +15,8 @@ public class GamePanel extends JPanel {
     final int vLineNum = 14;
     final int margin = 20;
     final int chessSize = 22;
+
+    private int gameMode = 1;   // 1 -> person vs person; 2 -> person vs computer
 
     private double lineGap = 25;
     private int nowUser = 1; // 1 - black; -1 - white
@@ -56,11 +60,24 @@ public class GamePanel extends JPanel {
 
     public void mouseClick(MouseEvent e) {
 
-        System.out.println("X=" + e.getX() + ", Y=" + e.getY());
+//        System.out.println("X=" + e.getX() + ", Y=" + e.getY());
 
         int x = (int) ((e.getX() - margin + lineGap / 2) / lineGap);
         int y = (int) ((e.getY() - margin + lineGap / 2) / lineGap);
         if (x > hLineNum + 1 || y > vLineNum + 1 || x < 0 || y < 0) return;
+
+        if (chessBoard[x][y] == 0) {
+            moveChess(x, y);
+
+            if (gameMode == 2) {
+                HashMap<Integer, Integer> position = AI.findBestPosition(chessBoard, nowUser);
+//                System.out.println("x= " + position.get(1) + " y= " + position.get(2));
+                moveChess(position.get(1), position.get(2));
+            }
+        }
+    }
+
+    private void moveChess(int x, int y) {
         boolean win = false;
         String winUser = null;
 
@@ -86,21 +103,22 @@ public class GamePanel extends JPanel {
         this.repaint();
 
         if (win) {
-            JOptionPane.showMessageDialog(this, winUser);
+            JOptionPane.showMessageDialog(this, winUser + " win!");
             try {
                 IOProcessor.saveData(chessBoard, winUser, startTime, nowTime, costTime);
             } catch (IOException e1) {
                 JOptionPane.showMessageDialog(this, "保存文件发生错误");
                 e1.printStackTrace();
             }
-            restart();
+            restart(gameMode);
         }
 
         this.repaint();
     }
 
-    void restart() {
+    void restart(int mode) {
         this.repaint();
+        gameMode = mode;
         hasClick = false;
         timeTicker.stop();
         for (int i = 0; i <= hLineNum; i++)
